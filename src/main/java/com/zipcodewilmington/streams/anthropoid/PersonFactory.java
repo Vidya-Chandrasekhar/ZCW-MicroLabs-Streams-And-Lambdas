@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 /**
  * Created by leon on 5/1/17.
+ *
  * @ATTENTION_TO_STUDENTS You are FORBIDDEN from using loops of any sort within the definition of this class.
  */
 public final class PersonFactory {
@@ -35,11 +36,20 @@ public final class PersonFactory {
 
     /**
      * Section 8.8
+     *
      * @param listSize - number of Person objects to create
      * @return - ArrayList of Person objects
      */ // TODO
     public static List<Person> createPersonList(int listSize) {
-        return null;
+//        List<Person> returList = new ArrayList<Person>();
+//        for (int i = 1; i <= listSize; i++){
+//           Person p = createRandomPerson();
+//           returList.add(p);
+//        }
+//         return  returList;
+
+
+        return Stream.generate(PersonFactory::createRandomPerson).limit(listSize).collect(Collectors.toList());
     }
 
 
@@ -48,16 +58,17 @@ public final class PersonFactory {
      * @return - Array of Person objects
      */ // TODO
     public static Person[] createPersonArray(int arrayLength) {
-        return null;
+        return Stream.generate(PersonFactory::createRandomPerson).limit(arrayLength).toArray(Person[]::new);
     }
-
 
     /**
      * Section 8.2
+     *
      * @param streamCount - number of Person objects to create
      * @return - Stream representation of collection of Person objects
      */ // TODO
     public static Stream<Person> createPersonStream(int streamCount) {
-        return null;
+
+        return Stream.generate(PersonFactory::createRandomPerson).limit(streamCount) ;
     }
 }

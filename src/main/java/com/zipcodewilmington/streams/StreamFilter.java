@@ -5,6 +5,7 @@ import com.zipcodewilmington.streams.anthropoid.PersonFactory;
 import com.zipcodewilmington.streams.tools.RandomUtils;
 import com.zipcodewilmington.streams.tools.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,7 +21,9 @@ public class StreamFilter {
      * No arg constructor
      */ //TODO - construct person stream of 100 person objects; startingCharacter is a random capital letter
     public StreamFilter() {
-        this(Stream.empty(), null);
+        Character c = RandomUtils.createCharacter('A','Z');
+        startingCharacter = Character.toString(c);
+        personStream = Stream.generate(PersonFactory::createRandomPerson).filter(s -> s.getName().startsWith(Character.toString(c))).limit(100);
     }
 
     /**
@@ -28,7 +31,9 @@ public class StreamFilter {
      * @param startingCharacter - character to filter by
      */ //TODO
     public StreamFilter(Person[] people, Character startingCharacter) {
-        this(Stream.empty(), null);
+        this.startingCharacter = Character.toString(startingCharacter);
+        personStream = Arrays.stream(people) .filter(s -> s.getName().startsWith(this.startingCharacter ));
+
     }
 
     /**
@@ -36,7 +41,8 @@ public class StreamFilter {
      * @param startingCharacter - character to filter by
      */ //TODO
     public StreamFilter(List<Person> people, Character startingCharacter) {
-        this(Stream.empty(), null);
+        this.startingCharacter = Character.toString(startingCharacter);
+        personStream = people.stream() .filter(s -> s.getName().startsWith(this.startingCharacter ));
     }
 
 

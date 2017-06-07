@@ -105,16 +105,14 @@ public class StreamFilter {
      * @return an array of person object whose name starts with `this.startingCharacter`
      */ //TODO
     public Person[] toArrayMultiLine() {
-        Person[] personArray = new Person[100];
-        int count=0;
+        List<Person> personList = new ArrayList<>();
         this.personStream.forEach(person ->{
             if (person.getName().startsWith(this.startingCharacter)){
-                personArray[count]=person;
-                count++;
+                personList.add(person);
             }
 
         } );
-        return personArray;
+        return (Person[])personList.toArray();
 
     }
 

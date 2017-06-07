@@ -37,6 +37,8 @@ public final class PersonWarehouse {
      * @return list of uniquely named Person objects
      */ //TODO
     public static Stream<Person> getUniquelyNamedPeople() {
+
+
         return people.stream().distinct();
     }
 
@@ -55,6 +57,7 @@ public final class PersonWarehouse {
      * @return a Stream of respective
      */ //TODO
     public static Stream<Person> getFirstNUniquelyNamedPeople(int n) {
+
         return  people.stream().distinct().limit(n);
     }
 
@@ -79,6 +82,7 @@ public final class PersonWarehouse {
      * @return Stream of all Aliases
      */ // TODO
     public static Stream<String> getAllAliases() {
+
         return people.stream().flatMap(x -> Arrays.stream(x.getAliases()));
     }
 
@@ -86,6 +90,7 @@ public final class PersonWarehouse {
      * @return list of names of Person objects
      */ // TODO
     public static List<String> getNames() {
+
         return people.stream().map(Person::getName).collect(Collectors.toList());
     }
 

@@ -41,13 +41,6 @@ public final class PersonFactory {
      * @return - ArrayList of Person objects
      */ // TODO
     public static List<Person> createPersonList(int listSize) {
-//        List<Person> returList = new ArrayList<Person>();
-//        for (int i = 1; i <= listSize; i++){
-//           Person p = createRandomPerson();
-//           returList.add(p);
-//        }
-//         return  returList;
-
 
         return Stream.generate(PersonFactory::createRandomPerson).limit(listSize).collect(Collectors.toList());
     }

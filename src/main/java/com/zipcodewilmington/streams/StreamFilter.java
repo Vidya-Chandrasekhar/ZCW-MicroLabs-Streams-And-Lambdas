@@ -5,6 +5,7 @@ import com.zipcodewilmington.streams.anthropoid.PersonFactory;
 import com.zipcodewilmington.streams.tools.RandomUtils;
 import com.zipcodewilmington.streams.tools.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,12 +57,25 @@ public class StreamFilter {
     }
 
 
-    /**
+    /**-> {
+     ​
+     writerEAM.writeStuff(​"how"​);
+     ​
+     writerEAM.writeStuff(​"sweet"​);
+     ​
+     });
      * Using multi-line lambda syntax
      * @return a list of person object whose name starts with `this.startingCharacter`
      */ //TODO
     public List<Person> toListMultiLine() {
-        return null;
+        List<Person> personList = new ArrayList<>();
+        this.personStream.forEach(person ->{
+            if (person.getName().startsWith(this.startingCharacter)){
+                   personList.add(person);
+            }
+
+        } );
+        return personList;
     }
 
 
@@ -70,7 +84,9 @@ public class StreamFilter {
      * @return a list of person objects whose name starts with `this.startingCharacter`
      */ //TODO
     public List<Person> toListOneLine() {
-        return null;
+          return personStream.filter(
+                               person -> person.getName().charAt(0) == startingCharacter.charAt(0))
+                                .collect(Collectors.toList());
     }
 
 
@@ -79,7 +95,8 @@ public class StreamFilter {
      * @return an array of person object whose name starts with `this.startingCharacter`
      */ //TODO
     public Person[] toArrayOneLine() {
-        return null;
+        return personStream.filter(
+                person -> person.getName().charAt(0) == startingCharacter.charAt(0)).toArray(Person[]::new);
     }
 
 
@@ -88,7 +105,17 @@ public class StreamFilter {
      * @return an array of person object whose name starts with `this.startingCharacter`
      */ //TODO
     public Person[] toArrayMultiLine() {
-        return null;
+        Person[] personArray = new Person[100];
+        int count=0;
+        this.personStream.forEach(person ->{
+            if (person.getName().startsWith(this.startingCharacter)){
+                personArray[count]=person;
+                count++;
+            }
+
+        } );
+        return personArray;
+
     }
 
 }
